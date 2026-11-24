@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Music360 UTM Links</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calm, practical, zero-guesswork team tool
+   IDEA: a studio patch bay: each campaign is a strip, each platform a labelled jack you pull a cable from
+   PICTURE: the working list itself, platform rows with big obvious Copy buttons
+   COLOUR and TYPE: deep teal band, white ground, coral accent; Rubik titles, Inter body
+   LAYOUT: header with campaign jump-chips and search, then one card per campaign, 5 rows each */
+:root{color-scheme:light dark;
+  --bg:light-dark(#f6f8f8,#0c1716);--card:light-dark(#ffffff,#13221f);--ink:light-dark(#10201e,#e9f2f0);
+  --muted:light-dark(#5b6d6a,#9fb3ae);--line:light-dark(#e1e8e6,#24382f);--band:#0f3d3a;--band2:#145650;
+  --accent:#ff5c61;--accent-d:#e8474d;--ok:#1f9d6b;--tagbg:light-dark(#eef4f3,#1b2d29)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2{font-family:Rubik,system-ui,sans-serif;margin:0;line-height:1.05;text-wrap:balance}
+.top{background:var(--band);color:#fff;padding:clamp(28px,4vw,52px) max(5vw,16px) 26px}
+.top-in,.main{max-width:1000px;margin:0 auto}
+h1{font-size:clamp(30px,4.6vw,46px);font-weight:700}
+.lede{margin:10px 0 0;max-width:640px;color:#cfe3df;font-size:16px}
+.how{display:flex;flex-wrap:wrap;gap:8px 18px;margin:18px 0 0;padding:0;list-style:none;font-size:14px;color:#e4f1ee}
+.how b{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:6px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:22px}
+.jump{display:flex;flex-wrap:wrap;gap:8px}
+.jump a{padding:8px 14px;border-radius:999px;background:var(--band2);color:#fff;text-decoration:none;font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,.15)}
+.jump a:hover,.jump a:focus-visible{background:#fff;color:var(--band);outline:none}
+.search{flex:1 1 220px;max-width:320px;margin-left:auto;height:44px;padding:0 14px;border-radius:10px;border:0;font:16px Inter,sans-serif;background:#fff;color:#10201e}
+.search:focus-visible{outline:3px solid var(--accent)}
+.main{padding:28px max(5vw,16px) 64px;box-sizing:content-box}
+.camp{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:22px;overflow:hidden;scroll-margin-top:16px}
+.camp-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.camp-h h2{font-size:24px;font-weight:700}
+.camp-h a{font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.row{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row.flash{animation:flash .9s ease}
+@keyframes flash{0%{background:color-mix(in srgb,var(--ok) 18%,transparent)}100%{background:transparent}}
+.plat{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
+.dot{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--c);color:#fff;font:700 12px/1 Rubik,system-ui,sans-serif;letter-spacing:.02em;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.url{font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);overflow-wrap:anywhere}
+.url .base{color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;font-family:Inter,sans-serif}
+.tags span{padding:2px 8px;border-radius:6px;background:var(--tagbg);font-size:13px;color:var(--ink)}
+.tags i{font-style:normal;color:var(--muted)}
+.copy{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:112px;height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--accent);color:#fff;font:600 15px Inter,sans-serif;cursor:pointer;transition:background .2s,transform .12s}
+.copy:hover{background:var(--accent-d)}
+.copy:active{transform:scale(.92)}
+.copy:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.copy svg{width:18px;height:18px}
+.copy .ck{display:none}
+.copy.done{background:var(--ok);animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
+.copy.done .cp{display:none}.copy.done .ck{display:block}
+.copy.done .ck path{stroke-dasharray:24;stroke-dashoffset:24;animation:draw .35s .05s ease forwards}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.empty{display:none;padding:30px;text-align:center;color:var(--muted)}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.toast{position:fixed;left:50%;bottom:24px;z-index:9;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 32px);padding:14px 20px;border-radius:14px;background:#10201e;color:#fff;box-shadow:0 14px 40px rgba(0,0,0,.3);transform:translate(-50%,140%);opacity:0;transition:transform .35s cubic-bezier(.3,1.4,.5,1),opacity .25s}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast .tic{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ok)}
+.toast .tic svg{width:16px;height:16px}
+.toast b{display:block;font-size:15px}
+.toast span{font-size:13px;color:#b9cfca}
+.toast.err .tic{background:var(--accent)}
+@media(max-width:640px){
+  .row{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px}
+  .row .url{grid-column:1/-1;grid-row:2}
+  .search{max-width:none;margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <h1>Music360 UTM links</h1>
+    <p class="lede">Use these links whenever you share a page, so we can see which platform the visitors came from. Don't type or edit them by hand: copy them from here.</p>
+    <ol class="how">
+      <li><b>1</b>Find the page you're sharing</li>
+      <li><b>2</b>Pick the platform you're posting on</li>
+      <li><b>3</b>Click Copy and paste</li>
+    </ol>
+    <div class="tools">
+      <nav class="jump" id="jump" aria-label="Jump to a page"></nav>
+      <input class="search" id="search" type="search" placeholder="Search, e.g. spark tiktok" aria-label="Search links">
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div id="list"></div>
+  <p class="empty" id="empty">No links match that search.</p>
+  <p class="note">Running paid Facebook or Instagram ads? Ask David for the ad links. Paid ads should use <code>utm_medium=paid_social</code> so they're reported separately from organic posts.</p>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+  <div><b id="toast-t">Copied!</b><span id="toast-s"></span></div>
+</div>
+
+<script>
+{
+  const SITE = "https://www.music-threesixty.com/";
+  const PLATFORMS = {
+    youtube:   { name: "YouTube",   c: "#e62117", b: "YT" },
+    tiktok:    { name: "TikTok",    c: "#111111", b: "TT" },
+    facebook:  { name: "Facebook",  c: "#1877f2", b: "FB" },
+    instagram: { name: "Instagram", c: "#d62976", b: "IG" },
+    kit:       { name: "Kit (email)", c: "#1f9d6b", b: "Kit" }
+  };
+  // [platform, medium] per campaign, exactly as agreed
+  const CAMPAIGNS = [
+    { id: "thrive", title: "THRIVE Membership", path: "all-new-thrive", campaign: "all_new_thrive",
+      rows: [["youtube","video"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] },
+    { id: "purpose-planner", title: "Purpose Planner", path: "purpose-planner", campaign: "purpose-planner",
+      rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] },
+    { id: "spark", title: "Spark Your Music Career (Workbook)", path: "spark-workbook", campaign: "spark-workbook",
+      rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] },
+    { id: "anxiety-to-agency", title: "Anxiety to Agency (Free Resource)", path: "free-resource-anxiety-to-agency", campaign: "anxiety-to-agency",
+      rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] }
+  ];
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  const urlOf = (cp, src, med) => SITE + cp.path + "?utm_source=" + src + "&utm_medium=" + med + "&utm_campaign=" + cp.campaign;
+  const ICON_COPY = '<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>';
+  const ICON_OK = '<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  document.getElementById("jump").innerHTML = CAMPAIGNS.map(c => '<a href="#' + c.id + '">' + esc(c.title.split(" (")[0]) + "</a>").join("");
+  document.getElementById("list").innerHTML = CAMPAIGNS.map(cp =>
+    '<section class="camp" id="' + cp.id + '"><div class="camp-h"><h2>' + esc(cp.title) + '</h2><a href="' + esc(SITE + cp.path) + '" target="_blank" rel="noopener">' + esc("music-threesixty.com/" + cp.path) + "</a></div>" +
+    cp.rows.map(([src, med]) => {
+      const p = PLATFORMS[src], u = urlOf(cp, src, med);
+      return '<div class="row" data-search="' + esc((cp.title + " " + cp.path + " " + p.name + " " + src).toLowerCase()) + '">' +
+        '<div class="plat"><span class="dot" aria-hidden="true" style="--c:' + p.c + '">' + esc(p.b) + '</span>' + esc(p.name) + "</div>" +
+        '<div class="url"><span class="base">' + esc(SITE.replace("https://", "") + cp.path) + "</span>?…" +
+        '<div class="tags"><span><i>source</i> ' + esc(src) + '</span><span><i>medium</i> ' + esc(med) + '</span><span><i>campaign</i> ' + esc(cp.campaign) + "</span></div></div>" +
+        '<button type="button" class="copy" data-url="' + esc(u) + '" data-label="' + esc(cp.title.split(" (")[0] + " → " + p.name) + '">' + ICON_COPY + ICON_OK + '<span class="lbl">Copy</span></button></div>';
+    }).join("") + "</section>").join("");
+
+  const toast = document.getElementById("toast");
+  let tt;
+  function showToast(title, sub, err) {
+    document.getElementById("toast-t").textContent = title;
+    document.getElementById("toast-s").textContent = sub;
+    toast.classList.toggle("err", !!err);
+    toast.classList.add("show");
+    clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2600);
+  }
+  function fallbackCopy(text) {
+    const t = document.createElement("textarea");
+    t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+    t.remove(); return ok;
+  }
+  document.getElementById("list").addEventListener("click", async e => {
+    const b = e.target.closest(".copy"); if (!b) return;
+    const r = b.getBoundingClientRect(), rp = document.createElement("span"), s = Math.max(r.width, r.height);
+    rp.className = "ripple"; rp.style.width = rp.style.height = s + "px";
+    rp.style.left = ((e.clientX || r.left + r.width / 2) - r.left - s / 2) + "px";
+    rp.style.top = ((e.clientY || r.top + r.height / 2) - r.top - s / 2) + "px";
+    b.appendChild(rp); setTimeout(() => rp.remove(), 650);
+    const text = b.dataset.url;
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (err) { ok = fallbackCopy(text); }
+    if (!ok) { showToast("Couldn't copy automatically", "Select the link and copy it by hand.", true); return; }
+    b.classList.remove("done"); void b.offsetWidth; b.classList.add("done");
+    b.querySelector(".lbl").textContent = "Copied!";
+    const row = b.closest(".row"); row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+    clearTimeout(b._t); b._t = setTimeout(() => { b.classList.remove("done"); b.querySelector(".lbl").textContent = "Copy"; }, 1800);
+    showToast("Link copied!", b.dataset.label + ": ready to paste");
+  });
+
+  const search = document.getElementById("search"), empty = document.getElementById("empty");
+  search.addEventListener("input", () => {
+    const words = search.value.toLowerCase().split(/\s+/).filter(Boolean);
+    let any = 0;
+    document.querySelectorAll(".camp").forEach(sec => {
+      let n = 0;
+      sec.querySelectorAll(".row").forEach(row => {
+        const hit = words.every(w => row.dataset.search.includes(w));
+        row.style.display = hit ? "" : "none"; if (hit) n++;
+      });
+      sec.style.display = n ? "" : "none"; any += n;
+    });
+    empty.style.display = any ? "none" : "block";
+  });
+}
+</script>
+</body>
+</html>
