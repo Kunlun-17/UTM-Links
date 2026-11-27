@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Music360 UTM Links</title>
+<title>Music360 &amp; DCA UTM Links</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -82,7 +82,7 @@ h1{font-size:clamp(30px,4.6vw,46px);font-weight:700}
 <body>
 <header class="top">
   <div class="top-in">
-    <h1>Music360 UTM links</h1>
+    <h1>Music360 &amp; DCA UTM links</h1>
     <p class="lede">Use these links whenever you share a page, so we can see which platform the visitors came from. Don't type or edit them by hand: copy them from here.</p>
     <ol class="how">
       <li><b>1</b>Find the page you're sharing</li>
@@ -126,21 +126,27 @@ h1{font-size:clamp(30px,4.6vw,46px);font-weight:700}
     { id: "spark", title: "Spark Your Music Career (Workbook)", path: "spark-workbook", campaign: "spark-workbook",
       rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] },
     { id: "anxiety-to-agency", title: "Anxiety to Agency (Free Resource)", path: "free-resource-anxiety-to-agency", campaign: "anxiety-to-agency",
+      rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] },
+    { id: "music360-website", title: "Music360 (Website)", path: "", campaign: "music360-website",
+      rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] },
+    { id: "dca-website", title: "Digital Clarinet Academy (Website)", site: "https://www.digitalclarinetacademy.com/", path: "", campaign: "dca-website",
       rows: [["youtube","social"],["tiktok","social"],["facebook","social"],["instagram","social"],["kit","email"]] }
   ];
+  const siteOf = cp => cp.site || SITE;
+  const shown = cp => (siteOf(cp) + cp.path).replace("https://", "").replace(/\/$/, "");
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
-  const urlOf = (cp, src, med) => SITE + cp.path + "?utm_source=" + src + "&utm_medium=" + med + "&utm_campaign=" + cp.campaign;
+  const urlOf = (cp, src, med) => siteOf(cp) + cp.path + "?utm_source=" + src + "&utm_medium=" + med + "&utm_campaign=" + cp.campaign;
   const ICON_COPY = '<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>';
   const ICON_OK = '<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 
   document.getElementById("jump").innerHTML = CAMPAIGNS.map(c => '<a href="#' + c.id + '">' + esc(c.title.split(" (")[0]) + "</a>").join("");
   document.getElementById("list").innerHTML = CAMPAIGNS.map(cp =>
-    '<section class="camp" id="' + cp.id + '"><div class="camp-h"><h2>' + esc(cp.title) + '</h2><a href="' + esc(SITE + cp.path) + '" target="_blank" rel="noopener">' + esc("music-threesixty.com/" + cp.path) + "</a></div>" +
+    '<section class="camp" id="' + cp.id + '"><div class="camp-h"><h2>' + esc(cp.title) + '</h2><a href="' + esc(siteOf(cp) + cp.path) + '" target="_blank" rel="noopener">' + esc(shown(cp).replace("www.", "")) + "</a></div>" +
     cp.rows.map(([src, med]) => {
       const p = PLATFORMS[src], u = urlOf(cp, src, med);
       return '<div class="row" data-search="' + esc((cp.title + " " + cp.path + " " + p.name + " " + src).toLowerCase()) + '">' +
         '<div class="plat"><span class="dot" aria-hidden="true" style="--c:' + p.c + '">' + esc(p.b) + '</span>' + esc(p.name) + "</div>" +
-        '<div class="url"><span class="base">' + esc(SITE.replace("https://", "") + cp.path) + "</span>?…" +
+        '<div class="url"><span class="base">' + esc(shown(cp)) + "</span>?…" +
         '<div class="tags"><span><i>source</i> ' + esc(src) + '</span><span><i>medium</i> ' + esc(med) + '</span><span><i>campaign</i> ' + esc(cp.campaign) + "</span></div></div>" +
         '<button type="button" class="copy" data-url="' + esc(u) + '" data-label="' + esc(cp.title.split(" (")[0] + " → " + p.name) + '">' + ICON_COPY + ICON_OK + '<span class="lbl">Copy</span></button></div>';
     }).join("") + "</section>").join("");
